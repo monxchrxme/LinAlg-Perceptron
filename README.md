@@ -20,7 +20,12 @@ $$\hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}}$$
 $$\mathcal{L}_{BCE} = -\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\log\hat{y}^{(i)} + (1-y^{(i)})\log(1-\hat{y}^{(i)})\right]$$
 
 Формулы градиентов для mini-batch:
-$$\frac{\partial \mathcal{L}_{BCE}}{\partial w} = \frac{1}{m} X^T (\hat{y} - y), \quad \frac{\partial \mathcal{L}_{BCE}}{\partial b} = \frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)} - y^{(i)})$$
+
+$$
+\frac{\partial \mathcal{L}_{BCE}}{\partial w} = \frac{1}{m} X^T (\hat{y} - y), 
+
+\quad \frac{\partial \mathcal{L}_{BCE}}{\partial b} = \frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)} - y^{(i)})
+$$
 
 ### 1.2 Hinge Loss (Альтернативная функция потерь)
 Для режима `loss_type="hinge"` вероятности не используются. Метки классов динамически переводятся из $\{0, 1\}$ в $\{-1, 1\}$. 
@@ -43,7 +48,10 @@ $$\frac{\partial \mathcal{L}_{hinge}}{\partial b} = -\frac{1}{m}\sum_{i \in acti
 $$\mathcal{L}_{total} = \mathcal{L}_{data} + \frac{\lambda}{2} \lVert w \rVert^2$$
 
 Влияние на градиент по весам:
-$$\frac{\partial \mathcal{L}_{total}}{\partial w} = \frac{\partial \mathcal{L}_{data}}{\partial w} + \lambda w$$
+
+$$
+\frac{\partial \mathcal{L}_{total}}{\partial w} = \frac{\partial \mathcal{L}_{data}}{\partial w} + \lambda w
+$$
 
 ### 1.4 Оптимизатор (Momentum SGD)
 Базовое обновление весов происходит классическим градиентным спуском. Для ускорения сходимости добавлен параметр инерции (Momentum $\beta$):
@@ -165,7 +173,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 ### 4.3 Влияние размера батча (Batch Size)
 
 **Параметры:** epochs=100, lr=0.1, инициализация — маленькие случайные веса.  
-**Варианты:** $BS \in \{1, 16, 64, 256\}$.
+**Варианты:** $ BS \in \{1, 16, 64, 256\} $.
 
 * $BS=1$ (Чистый SGD): График сильно "шумит", так как направление корректируется по каждому отдельному примеру.
 * $BS=256$: Линия падает очень гладко, но медленнее, так как за одну эпоху происходит всего $\approx 2$ обновления весов. Оптимум находится в диапазоне $16-64$.
