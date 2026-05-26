@@ -22,9 +22,10 @@ $$\mathcal{L}_{BCE} = -\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\log\hat{y}^{(i)} +
 Формулы градиентов для mini-batch:
 
 $$
-\frac{\partial \mathcal{L}_{BCE}}{\partial w} = \frac{1}{m} X^T (\hat{y} - y) 
-
-\quad \frac{\partial \mathcal{L}_{BCE}}{\partial b} = \frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)} - y^{(i)})
+\begin{aligned}
+\frac{\partial \mathcal{L}_{BCE}}{\partial w} &= \frac{1}{m} X^T (\hat{y} - y) \\
+\frac{\partial \mathcal{L}_{BCE}}{\partial b} &= \frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)} - y^{(i)})
+\end{aligned}
 $$
 
 ### 1.2 Hinge Loss (Альтернативная функция потерь)
@@ -184,7 +185,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 ### 4.4 Влияние инициализации весов
 **Параметры:** epochs=100, lr=0.1, batch_size=32. 
 
-**Варианты:** `zeros`, `small_random` ($ \mathcal{N}(0, 0.01) $), `large_random` ($ \mathcal{N}(0, 10) $).
+**Варианты:** `zeros`, `small_random` ($\mathcal{N}(0, 0.01)$), `large_random` ($\mathcal{N}(0, 10)$).
 
 Обе инициализации около нуля (`zeros` и `small`) сразу показывают плавное убывание Loss. При `large_random` модель на старте крайне уверенна в неправильных предсказаниях. График потерь стартует с огромных значений и в первые 10 эпох резко падает вниз, после чего догоняет остальные модели.
 
