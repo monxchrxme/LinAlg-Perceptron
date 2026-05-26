@@ -22,7 +22,7 @@ $$\mathcal{L}_{BCE} = -\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\log\hat{y}^{(i)} +
 Формулы градиентов для mini-batch:
 
 $$
-\frac{\partial \mathcal{L}_{BCE}}{\partial w} = \frac{1}{m} X^T (\hat{y} - y), 
+\frac{\partial \mathcal{L}_{BCE}}{\partial w} = \frac{1}{m} X^T (\hat{y} - y) 
 
 \quad \frac{\partial \mathcal{L}_{BCE}}{\partial b} = \frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)} - y^{(i)})
 $$
