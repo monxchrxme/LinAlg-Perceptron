@@ -154,9 +154,9 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 |  ROC-AUC | 0.9458  |
 
 
-![График](plots/learning_plots/basic_training_results.jpg)
+![График](report/learning_plots/basic_training_results.jpg)
 
-![График](plots/experiment_plots/metrics_exp.jpg)
+![График](report/experiment_plots/metrics_exp.jpg)
 
 ---
 
@@ -168,7 +168,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 * При $\eta \ge 0.5$ график Loss начинает осциллировать (дергаться), так как шаг градиентного спуска слишком большой и перепрыгивает локальный оптимум.
 * В связи с тем, что оптимизируемая функция строго выпуклая, в итоге все модели достигли дна и показали одинаковую Accuracy, однако скорость и стабильность пути кардинально различались.
 
-![График](plots/experiment_plots/lr_exp.jpg)
+![График](report/experiment_plots/learning_rate_exp.jpg)
 ---
 
 ### 4.3 Влияние размера батча (Batch Size)
@@ -179,7 +179,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 * $BS=1$ (Чистый SGD): График сильно "шумит", так как направление корректируется по каждому отдельному примеру.
 * $BS=256$: Линия падает очень гладко, но медленнее, так как за одну эпоху происходит всего $\approx 2$ обновления весов. Оптимум находится в диапазоне $16-64$.
 
-![График](plots/experiment_plots/batch_size_exp.jpg)
+![График](report/experiment_plots/batch_size_exp.jpg)
 ---
 
 ### 4.4 Влияние инициализации весов
@@ -189,7 +189,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 
 Обе инициализации около нуля (`zeros` и `small`) сразу показывают плавное убывание Loss. При `large_random` модель на старте крайне уверенна в неправильных предсказаниях. График потерь стартует с огромных значений и в первые 10 эпох резко падает вниз, после чего догоняет остальные модели.
 
-![График](plots/experiment_plots/weights_init_exp.jpg)
+![График](report/experiment_plots/weights_init_exp.jpg)
 
 ---
 
@@ -202,7 +202,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 * На Гауссианах Loss плавно сходится к нулю, разделяющая граница идеальна.
 * На `XOR` и `Окружностях` перцептрон не способен сойтись: график Loss застревает на уровне $\approx 0.69$ (логарифм 2), что равноценно выдаче вероятности 0.5 для всех точек. Прямая линия физически не может разделить такие классы. Это наглядно демонстрирует потребность в многослойных нейросетях.
 
-![График](plots/experiment_plots/linear_xor_circle_exp.jpg)
+![График](report/experiment_plots/linear_xor_circle_exp.jpg)
 
 ---
 
@@ -211,7 +211,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 
 На одном и том же датасете **Hinge Loss** показал более острую траекторию сходимости и итоговую точность `0.9128` (против `0.9060` у BCE). Это объясняется математикой Hinge Loss: она игнорирует "удобные" точки, фокусируясь на построении границы с максимальным геометрическим запасом (margin) вокруг сложных примеров.
 
-![График](plots/experiment_plots/hinge_vs_bce_exp.jpg)
+![График](report/experiment_plots/hinge_vs_bce_exp.jpg)
 
 ---
 
@@ -224,7 +224,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 * **$\lambda = 0.01$:** Норма весов упала до $2.47$, но точность осталась на максимуме (`0.9060`). Идеальный уровень регуляризации, модель стала устойчивее.
 * **$\lambda = 1.0$:** Слишком жесткий штраф. Веса "сжались" до $0.29$, модель начала недообучаться (Accuracy упала до `0.8859`).
 
-![График](plots/experiment_plots/l2_exp.jpg)
+![График](report/experiment_plots/l2_exp.jpg)
 
 ---
 
@@ -236,7 +236,7 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 Анализ Heatmap показывает четкую диагональную зависимость: маленькие значения $\eta$ требуют маленького батча (чтобы делать больше шагов), а высокие $\eta$ работают лучше при больших батчах.
 Лучшие гиперпараметры по среднему Accuracy: `lr=0.5, batch_size=64` (Mean Acc: $0.8820$). 
 
-![График](plots/experiment_plots/cross_validation_exp.jpg)
+![График](report/experiment_plots/cross_validation_exp.jpg)
 
 ---
 
@@ -250,5 +250,4 @@ uv rum experiments/exp_metrics.py             # Acc, Prec, Rec, F1, ROC-AUC
 * **Momentum ($\beta=0.9$):** Идеальная сходимость. Накопленная скорость позволяет алгоритму пролетать плоские участки. Минимум достигнут уже к 30-й эпохе.
 * **Momentum ($\beta=0.99$):** Избыточная инерция. "Тяжелый" алгоритм на огромной скорости пролетел глобальный минимум и выкатился на противоположный склон (резкий скачок Loss вверх на 10-й эпохе), вызвав сильные осцилляции.
 
-![График](plots/experiment_plots/momentum_exp.jpg)
---
+![График](report/experiment_plots/momentum_exp.jpg)
